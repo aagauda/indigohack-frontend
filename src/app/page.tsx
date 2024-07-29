@@ -1,113 +1,63 @@
-import Image from "next/image";
+"use client";
+import Image from 'next/image';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Plane } from "lucide-react";
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
+    <div className="relative min-h-screen bg-gradient-to-b from-blue-900 to-blue-600 text-white">
+      {/* Background Image */}
+      {/* <div className="absolute inset-0">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src="/images/aviation-background.jpg" // Add a suitable aviation background image
+          alt="Aviation Background"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-50"
         />
+      </div> */}
+
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8">
+        {/* Hero Section */}
+        <div className="text-center">
+          <Plane className="text-white text-8xl mb-4" />
+          <h1 className="text-5xl font-bold mb-6">Welcome to AA_Aviation</h1>
+          <p className="text-xl mb-8">Your gateway to seamless flight bookings and management. Experience the best in aviation services with us.</p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <Link href="/auth/login">
+              <Button className="bg-green-500 hover:bg-green-600">Login</Button>
+            </Link>
+            <Link href={"/auth/register"}>
+              <Button className="bg-yellow-500 hover:bg-yellow-600">Sign Up</Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Additional sections */}
+        <section className="mt-12 text-center">
+          <h2 className="text-3xl font-semibold mb-4">Why Choose Us?</h2>
+          <p className="text-lg">We offer the best services for booking and managing your flights with ease and reliability. Discover the features that set us apart.</p>
+          <div className="flex flex-col md:flex-row gap-8 mt-8 justify-center">
+            <div className="p-4 bg-white text-black rounded-lg shadow-lg max-w-xs">
+              <h3 className="text-2xl font-bold mb-2">Global Reach</h3>
+              <p>Book flights to any destination worldwide with our extensive network.</p>
+            </div>
+            <div className="p-4 bg-white text-black rounded-lg shadow-lg max-w-xs">
+              <h3 className="text-2xl font-bold mb-2">Seamless Experience</h3>
+              <p>Enjoy a user-friendly interface and a smooth booking process.</p>
+            </div>
+            <div className="p-4 bg-white text-black rounded-lg shadow-lg max-w-xs">
+              <h3 className="text-2xl font-bold mb-2">24/7 Support</h3>
+              <p>Our customer support team is available around the clock to assist you.</p>
+            </div>
+          </div>
+        </section>
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
