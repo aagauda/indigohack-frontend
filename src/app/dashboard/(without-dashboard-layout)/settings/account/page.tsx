@@ -40,7 +40,7 @@ export default function ProfileForm() {
   });
 
   useEffect(() => {
-    if (status === "authenticated") {
+    // if (status === "authenticated") {
       async function fetchUserData() {
         try {
           const response = await axios.get(`${baseUrl}/users/`, {
@@ -65,7 +65,7 @@ export default function ProfileForm() {
       }
 
       fetchUserData();
-    }
+    // }
   }, [status, session, form]);
 
   async function onSubmit(data: ProfileFormValues) {
