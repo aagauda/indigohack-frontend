@@ -33,12 +33,12 @@ const sidebarNavItems = [
   // },
 ]
 
-interface SettingsLayoutProps {
-  children: React.ReactNode,
-  session:any
-}
+// interface SettingsLayoutProps {
+//   children: React.ReactNode,
+//   session:any
+// }
 
-export default function SettingsLayout({ children,session }: SettingsLayoutProps) {
+export default function SettingsLayout({ children,session }: any) {
   return (
     <>
     <SessionProvider session={session}>

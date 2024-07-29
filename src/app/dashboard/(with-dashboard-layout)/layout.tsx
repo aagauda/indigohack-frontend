@@ -3,12 +3,9 @@ import { cn } from '@/lib/utils'
 import { SessionProvider } from 'next-auth/react'
 import React from 'react'
 
-type Props = {}
+// type Props = {}
 
-function layout({ children, session }: {
-  children: React.ReactNode,
-  session: any
-}) {
+function layout({ children, session }: any) {
   return (
     <SessionProvider session={session}>
       <div className={cn('min-h-screen w-full bg-white text-black flex ')}>
