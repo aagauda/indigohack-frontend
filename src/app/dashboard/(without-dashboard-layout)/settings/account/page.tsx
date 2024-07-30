@@ -45,7 +45,7 @@ export default function ProfileForm() {
         try {
           const response = await axios.get(`${baseUrl}/users/`, {
             headers: {
-              Authorization: `Bearer ${session.user.tempToken}`
+              Authorization: `Bearer ${session?.user?.tempToken}`
             }
           });
           const userData = response.data;
