@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 import { baseUrl } from "../../../../util/config";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -23,6 +24,9 @@ interface FlightDetails {
   scheduled_arrival: string; // Use a more specific type if applicable, e.g., Date
   actual_departure?: string; // Optional fields
   actual_arrival?: string; // Optional fields
+  to?: string;
+  from?: string;
+  travel_date?: string;
 }
 
 
@@ -46,7 +50,9 @@ export default function DashboardApp() {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const [refreshInterval, setRefreshInterval] = useState(300000); // Interval in milliseconds (30 seconds)
   const [refreshInterval, setRefreshInterval] = useState(300000); // Interval in milliseconds (30 seconds)
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +89,7 @@ export default function DashboardApp() {
 
   return (
     <div className="flex flex-col gap-5 w-full ">
-       <p className="p-4 font-semibold text-center bg-red-800 text-white rounded-lg">Please note this is a simulation and the flight data you can update the flight status via the admin credentials !!</p>
+      <p className="p-4 font-semibold text-center bg-red-800 text-white rounded-lg">Please note this is a simulation and the flight data you can update the flight status via the admin credentials !!</p>
       <PageTitle title="Your Bookings" />
 
       {loading ? (
@@ -95,23 +101,34 @@ export default function DashboardApp() {
           ) : (
             <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-2">
               {result.map((data, index) => (
-                <Card
-                  key={index}
-                  icon={Plane}
-                  label={`${data?.flight?.airline}`}
-                  bookingStatus={data?.status}
-                  seat_number={data?.seat_number}
-                  booking_date={data?.booking_date}
-                  flight_id={data?.flight?.flight_id}
-                  flightStatus={data?.flight?.status}
-                  departure_gate={data?.flight?.departure_gate}
-                  arrival_gate={data?.flight?.arrival_gate}
-                  scheduled_departure={data?.flight?.scheduled_departure}
-                  scheduled_arrival={data?.flight?.scheduled_arrival}
-                  actual_departure={data?.flight?.actual_departure}
-                  actual_arrival={data?.flight?.actual_arrival}
-                />
+                <>
+                  <Card
+                    key={index}
+                    icon={Plane}
+                    label={`${data?.flight?.airline}`}
+                    bookingStatus={data?.status}
+                    seat_number={data?.seat_number}
+                    booking_date={data?.booking_date}
+                    flight_id={data?.flight?.flight_id}
+                    flightStatus={data?.flight?.status}
+                    departure_gate={data?.flight?.departure_gate}
+                    arrival_gate={data?.flight?.arrival_gate}
+                    scheduled_departure={data?.flight?.scheduled_departure}
+                    scheduled_arrival={data?.flight?.scheduled_arrival}
+                    actual_departure={data?.flight?.actual_departure}
+                    actual_arrival={data?.flight?.actual_arrival}
+                    to={data?.flight?.to}
+                    from={data?.flight?.from}
+                    travel_date={data?.flight?.travel_date}
+                  />
+                  {/* <Button type="button" >
+                    Cancel Flight
+                  </Button> */}
+                </>
+
+
               ))}
+
             </section>
           )}
         </>

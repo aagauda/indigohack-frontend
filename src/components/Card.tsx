@@ -17,6 +17,10 @@ export type CardProps = {
   scheduled_arrival: string;
   actual_departure?: string;
   actual_arrival?: string;
+  from?: string;
+  to?: string;
+  travel_date?: string;
+  
 };
 
 // Function to format date into 12-hour format
@@ -38,7 +42,7 @@ function getRemainingTime(dateString: string): string {
   const targetDate = new Date(dateString);
   const now = new Date();
   const diffInMs = differenceInMilliseconds(targetDate, now);
-  
+
   if (diffInMs <= 0) return '00:00:00';
 
   const hours = Math.floor(diffInMs / (1000 * 60 * 60));
@@ -58,7 +62,7 @@ export default function Card(props: CardProps) {
       const now = new Date();
       const departureDate = new Date(props.scheduled_departure);
       const arrivalDate = new Date(props.scheduled_arrival);
-      
+
       if (props.flightStatus === 'Cancelled') {
         setDepartureCountdown('Flight Cancelled');
         setArrivalCountdown('Flight Cancelled');
@@ -142,6 +146,36 @@ export default function Card(props: CardProps) {
               )}
             </div>
           )}
+
+
+
+          {/* To and from and travel_date */}
+
+          {(props.to || props.from || props.travel_date) && (
+            <div className='flex flex-col sm:flex-row justify-between gap-6 bg-gray-100 p-4 rounded-lg shadow-md'>
+              {props.to && (
+                <div className='flex flex-col items-start'>
+                  <p className='text-base text-gray-700'>To:</p>
+                  <p className='text-lg font-medium text-gray-900'>{props.to}</p>
+                </div>
+              )}
+              {props.from && (
+                <div className='flex flex-col items-start'>
+                  <p className='text-base text-gray-700'>From:</p>
+                  <p className='text-lg font-medium text-gray-900'>{props.from}</p>
+                </div>
+              )}
+              {props.travel_date && (
+                <div className='flex flex-col items-start'>
+                  <p className='text-base text-gray-700'>Travel Date:</p>
+                  <p className='text-lg font-medium text-gray-900'>{formatDate(props.travel_date).split(' ')[0]}</p>
+                </div>
+              )}
+            </div>
+          )}
+
+
+
           {/* Scheduled and Actual Times */}
           {(props.scheduled_departure || props.scheduled_arrival || props.actual_departure || props.actual_arrival) && (
             <div className='bg-gray-100 p-4 rounded-lg shadow-md'>
